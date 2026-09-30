@@ -1,26 +1,269 @@
 @import "tailwindcss";
+@source "../app";
+@source "../lib";
+@source "../components";
+@source "./**/*.tsx";
+@source "../**/*.tsx";
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+}
+
+html, body {
+  background-color: #ffffff !important;
+  color: #0f172a;
+}
+
+/* Force Tailwind-like gradients inline since dynamic classes sometimes get purged in custom builds */
+._dbg-grad-bg {
+  background-image: linear-gradient(135deg, #f8fafc 0%, #eff6ff 45%, #eef2ff 100%);
+}
+._dbg-grad-calendar-head {
+  background-image: linear-gradient(135deg, #f8fafccc 0%, #ffffff 55%, #eff6ff99 100%);
+}
+._dbg-grad-sidebar-user {
+  background-image: linear-gradient(135deg, #f8fafce6 0%, #ffffffff 100%);
+}
+._dbg-grad-badge-admin {
+  background-image: linear-gradient(90deg, #1e293b, #020617);
+}
+._dbg-grad-badge-disp {
+  background-image: linear-gradient(90deg, #2563eb, #4338ca);
+}
+._dbg-grad-avatar-admin {
+  background-image: linear-gradient(135deg, #334155 0%, #1e293b 55%, #020617 100%);
+}
+._dbg-grad-avatar-disp {
+  background-image: linear-gradient(135deg, #3b82f6 0%, #2563eb 55%, #4338ca 100%);
+}
+._dbg-grad-star {
+  background-image: linear-gradient(135deg, #fbbf24, #d97706);
+}
+._dbg-grad-nav-active {
+  background-image: linear-gradient(90deg, #0f172a, #1e293b);
+}
+._dbg-grad-btn-new-booking {
+  background-image: linear-gradient(90deg, #2563eb, #4338ca);
+}
+._dbg-grad-btn-today {
+  background-image: linear-gradient(90deg, #2563eb, #4338ca);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-custom-sans);
+  --font-serif: var(--font-serif);
   --font-mono: var(--font-geist-mono);
+  --color-pannon-blue: #0056D2;
+  --color-pannon-blue-dark: #003F9F;
+  --color-pannon-blue-light: #E8F0FE;
+  --color-pannon-yellow: #FFD700;
+  --color-pannon-yellow-dark: #E6B800;
+
+  --color-oc-blue: #306ab7;
+  --color-oc-blue-dark: #265287;
+  --color-oc-blue-deep: #1f4676;
+  --color-oc-tint: #ecf3fb;
+  --color-oc-ink: #242424;
+  --color-oc-muted: #616161;
+  --color-oc-line: #e1e1e1;
+  --color-oc-dot: #c7c6c4;
+  --color-oc-surface: #f5f5f5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+html, body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-custom-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ---------- Outlook style calendar ---------- */
+.oc-root {
+  font-family: var(--font-outlook), Roboto, "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--color-oc-ink);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+.oc-root button,
+.oc-root a {
+  touch-action: manipulation;
+}
+.oc-root button {
+  font-family: inherit;
+}
+@layer base {
+  .oc-root button:focus:not(:focus-visible) {
+    outline: none;
+  }
+  .oc-root button:focus-visible {
+    outline: 2px solid var(--color-oc-blue);
+    outline-offset: -2px;
+  }
+}
+.oc-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.oc-scroll::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .oc-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #c8c8c8 transparent;
+  }
+  .oc-scroll::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+  }
+  .oc-scroll::-webkit-scrollbar-thumb {
+    background: #c8c8c8;
+    border-radius: 999px;
+    border: 3px solid #fff;
+  }
+}
+.oc-safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.oc-safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.oc-shadow-strip {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16), 0 0.5px 1.5px rgba(0, 0, 0, 0.12);
+}
+.oc-shadow-fab {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.24), 0 1.5px 4px rgba(0, 0, 0, 0.2);
+}
+.oc-shadow-sheet {
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.22);
+}
+.oc-shadow-pop {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22), 0 1.5px 6px rgba(0, 0, 0, 0.14);
+}
+.oc-ripple {
+  transition: background-color 120ms ease, transform 120ms ease, box-shadow 160ms ease;
+}
+.oc-ripple:active {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.oc-ripple-light:active {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+.oc-press:active {
+  transform: scale(0.985);
+}
+
+@keyframes oc-sheet-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes oc-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes oc-drawer-in {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+@keyframes oc-pop-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes oc-snack-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes oc-skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.oc-sheet-in { animation: oc-sheet-in 280ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.oc-fade-in { animation: oc-fade-in 200ms ease both; }
+.oc-drawer-in { animation: oc-drawer-in 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.oc-pop-in { animation: oc-pop-in 160ms ease-out both; }
+@media (min-width: 1024px) {
+  .oc-sheet-in { animation: oc-pop-in 160ms ease-out backwards; }
+}
+.oc-snack-in { animation: oc-snack-in 240ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.oc-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e6e6e6 37%, #f0f0f0 63%);
+  background-size: 400% 100%;
+  animation: oc-skeleton 1.4s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-sheet-in, .oc-fade-in, .oc-drawer-in, .oc-pop-in, .oc-snack-in, .oc-skeleton {
+    animation-duration: 1ms;
+  }
 }
