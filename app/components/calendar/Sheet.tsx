@@ -37,14 +37,14 @@ export default function Sheet({ open, onClose, label, children, tall }: Props) {
 
   return createPortal(
     <div className="oc-root fixed inset-0 z-[60] flex items-end justify-center lg:items-center" role="presentation">
-      <div className="oc-fade-in absolute inset-0 bg-black/40" onClick={onClose} aria-hidden />
+      <div className="oc-fade-in absolute inset-0 bg-[#0b1220]/45 backdrop-blur-[3px]" onClick={onClose} aria-hidden />
       <div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label={label}
         tabIndex={-1}
-        className={`oc-sheet-in oc-shadow-sheet relative flex w-full flex-col overflow-hidden rounded-t-[18px] bg-white outline-none lg:max-w-[520px] lg:rounded-[10px] ${
+        className={`oc-sheet-in oc-shadow-sheet relative flex w-full flex-col overflow-hidden rounded-t-[26px] bg-white outline-none lg:max-w-[520px] lg:rounded-[16px] ${
           tall ? "h-[92dvh]" : "max-h-[90dvh]"
         } lg:max-h-[86vh] lg:h-auto`}
         style={{
@@ -69,7 +69,7 @@ export default function Sheet({ open, onClose, label, children, tall }: Props) {
           }}
           onPointerCancel={() => setDrag(null)}
         >
-          <span className="h-1 w-9 rounded-full bg-[#D1D1D1]" />
+          <span className="h-[5px] w-10 rounded-full bg-[#D5D8DE]" />
         </div>
         {children}
       </div>

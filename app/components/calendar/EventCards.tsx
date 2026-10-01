@@ -38,7 +38,7 @@ function Chip({ children, strong }: { children: React.ReactNode; strong?: boolea
   return (
     <span
       className={`shrink-0 rounded-full px-1.5 py-[1px] text-[10.5px] leading-[14px] font-medium ${
-        strong ? "bg-white/85 text-[#242424]" : "bg-white/70 text-[#616161]"
+        strong ? "bg-white/90 text-oc-ink shadow-[0_0_0_1px_rgba(0,0,0,0.05)]" : "bg-white/70 text-oc-muted"
       }`}
     >
       {children}
@@ -50,9 +50,9 @@ export function TimeColumn({ event }: { event: CalEvent }) {
   if (event.allDay) {
     return (
       <div className="w-[70px] shrink-0 pt-[6px] pr-2">
-        <div className="text-[11px] leading-[14px] font-medium tracking-[0.02em] text-[#242424] uppercase">Egész nap</div>
+        <div className="text-[10.5px] leading-[14px] font-bold tracking-[0.01em] whitespace-nowrap text-oc-ink uppercase">Egész nap</div>
         {event.dayCount && event.dayCount > 1 ? (
-          <div className="mt-[3px] text-[12px] leading-[16px] text-[#616161]">
+          <div className="mt-[3px] text-[12px] leading-[16px] text-oc-muted">
             {event.dayIndex ?? 1}/{event.dayCount}. nap
           </div>
         ) : null}
@@ -62,10 +62,10 @@ export function TimeColumn({ event }: { event: CalEvent }) {
   const minutes = Math.round((event.end - event.start) / MS_MINUTE);
   return (
     <div className="w-[70px] shrink-0 pr-2">
-      <div className="mt-[7px] text-[13px] leading-[18px] font-medium text-[#242424] tabular-nums">
+      <div className="mt-[8px] text-[15px] leading-[18px] font-semibold tracking-[-0.01em] text-oc-ink tabular-nums">
         {formatClock(event.start)}
       </div>
-      <div className="mt-[4px] text-[12px] leading-[16px] text-[#616161]">{formatDuration(minutes)}</div>
+      <div className="mt-[3px] text-[12px] leading-[16px] text-oc-muted">{formatDuration(minutes)}</div>
     </div>
   );
 }
@@ -82,16 +82,16 @@ export function EventCard({ event, onOpen }: CardProps) {
     <button
       type="button"
       onClick={() => onOpen(event)}
-      className="oc-ripple flex min-h-[52px] w-full items-stretch gap-2 rounded-[6px] px-[10px] py-[7px] text-left"
+      className="oc-card flex min-h-[56px] w-full items-stretch gap-2 rounded-[10px] px-[12px] py-[9px] text-left"
       style={eventSurface(event)}
     >
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-[6px]">
           {event.icon === "clipboard" && <ClipboardList size={14} strokeWidth={2} className="shrink-0" />}
-          <span className={`truncate text-[14px] leading-[18px] font-medium ${strike}`}>{event.title}</span>
+          <span className={`truncate text-[14.5px] leading-[19px] font-semibold tracking-[-0.005em] ${strike}`}>{event.title}</span>
         </div>
         {event.subtitle && (
-          <div className={`mt-[1px] truncate text-[12px] leading-[16px] opacity-80 ${strike}`}>{event.subtitle}</div>
+          <div className={`mt-[2px] truncate text-[12.5px] leading-[16px] opacity-80 ${strike}`}>{event.subtitle}</div>
         )}
       </div>
       <div className="flex shrink-0 flex-col items-end justify-between gap-1">
@@ -118,7 +118,7 @@ export function AllDayCard({ event, onOpen }: CardProps) {
     <button
       type="button"
       onClick={() => onOpen(event)}
-      className="oc-ripple flex h-[40px] w-full items-center gap-2 rounded-[6px] border-[1.5px] px-3 text-left"
+      className="oc-card flex h-[42px] w-full items-center gap-2 rounded-[10px] border-[1.5px] px-3 text-left"
       style={style}
     >
       {leave && <TreePalm size={15} strokeWidth={2} className="shrink-0" />}
@@ -132,7 +132,7 @@ export function AllDayCard({ event, onOpen }: CardProps) {
 
 export function NowPill({ children, clock }: { children: React.ReactNode; clock?: boolean }) {
   return (
-    <div className="mb-2 ml-[82px] flex h-[25px] w-fit items-center gap-[5px] rounded-full bg-oc-blue px-[13px] text-[13px] leading-none font-medium text-white">
+    <div className="oc-fab-grad mb-2 ml-[82px] flex h-[26px] w-fit items-center gap-[6px] rounded-full px-[13px] text-[12.5px] leading-none font-semibold text-white shadow-[0_4px_12px_-4px_rgba(15,108,189,0.6)]">
       {clock && <Clock size={12} strokeWidth={2.4} />}
       {children}
     </div>

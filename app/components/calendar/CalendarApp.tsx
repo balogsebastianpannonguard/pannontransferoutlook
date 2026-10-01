@@ -276,8 +276,8 @@ export default function CalendarApp({ user }: { user: UserInfo }) {
 
   if (!isDesktop) {
     return (
-      <div className="oc-root flex h-dvh flex-col overflow-hidden bg-white">
-        <header className="oc-safe-top shrink-0 bg-oc-blue text-white">
+      <div className="oc-root flex h-dvh flex-col overflow-hidden bg-[#fbfbfd]">
+        <header className="oc-safe-top oc-appbar shrink-0 text-white">
           <AppBar
             title={title}
             view={view}
@@ -313,7 +313,7 @@ export default function CalendarApp({ user }: { user: UserInfo }) {
 
   return (
     <div className="oc-root flex h-dvh flex-col overflow-hidden bg-white">
-      <header className="flex h-[52px] shrink-0 items-center gap-4 bg-oc-blue px-4 text-white">
+      <header className="oc-appbar flex h-[52px] shrink-0 items-center gap-4 px-4 text-white">
         <div className="flex items-center gap-2.5">
           <CalendarDays size={22} />
           <span className="text-[17px] font-medium whitespace-nowrap">Pannon Transfer · Naptár</span>

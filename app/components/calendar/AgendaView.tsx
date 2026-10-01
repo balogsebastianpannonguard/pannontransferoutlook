@@ -35,7 +35,7 @@ function EmptyDay({ day, loading, onAdd }: { day: string; loading?: boolean; onA
         onClick={() => onAdd?.(day)}
         disabled={!onAdd}
         aria-label="Erre a napra nincs tevékenység. Új esemény felvétele"
-        className="flex min-h-[46px] w-full items-center gap-[10px] rounded-[10px] border border-dashed border-[#D6D6D6] bg-[#FAFAFA] py-2 pr-[10px] pl-[10px] text-left transition-colors active:bg-oc-surface"
+        className="flex min-h-[46px] w-full items-center gap-[10px] rounded-[10px] border border-dashed border-[#D9DCE2] bg-white/70 py-2 pr-[10px] pl-[10px] text-left transition-all active:scale-[0.985] active:bg-oc-surface"
       >
         <span className="grid size-[26px] shrink-0 place-items-center rounded-full bg-white text-[#8A8886] shadow-[0_0_0_1px_#E6E6E6]">
           <CalendarCheck size={14} strokeWidth={1.9} />
@@ -173,7 +173,7 @@ export default function AgendaView({
   const todayKey = ymd(today);
 
   return (
-    <div ref={containerRef} onScroll={handleScroll} className="oc-scroll relative h-full overflow-y-auto overscroll-contain bg-white">
+    <div ref={containerRef} onScroll={handleScroll} className="oc-scroll relative h-full overflow-y-auto overscroll-contain bg-[#fbfbfd]">
       <div className={singleDay ? "pt-4" : "pt-[6px]"}>
         {days.map((day, index) => {
           const date = parseYmd(day);
@@ -201,22 +201,27 @@ export default function AgendaView({
               className="pb-2"
             >
               {showMonth && (
-                <div className="mt-3 mb-[14px] flex items-center gap-[10px] px-3">
-                  <span className="h-px flex-1 bg-oc-ink/80" style={{ height: "0.5px" }} />
-                  <span className="text-[20px] leading-[26px] font-medium text-oc-ink">
+                <div className="mt-4 mb-[14px] flex items-center gap-[12px] px-3">
+                  <span className="h-px flex-1 bg-gradient-to-r from-transparent to-oc-ink/25" />
+                  <span className="text-[13px] leading-[18px] font-bold tracking-[0.14em] text-oc-ink/70 uppercase">
                     {HU_MONTHS[date.getMonth()]}
                     {date.getFullYear() !== today.getFullYear() ? ` ${date.getFullYear()}` : ""}
                   </span>
-                  <span className="h-px flex-1 bg-oc-ink/80" style={{ height: "0.5px" }} />
+                  <span className="h-px flex-1 bg-gradient-to-l from-transparent to-oc-ink/25" />
                 </div>
               )}
 
               {(
-                <h3 className="mb-[10px] flex items-baseline gap-[10px] px-3 text-[19px] leading-[26px] text-oc-ink">
-                  <span className="font-bold">
+                <h3 className="mb-[10px] flex items-center gap-[10px] px-3 text-[19px] leading-[26px] text-oc-ink">
+                  <span className={`font-bold tracking-[-0.01em] ${isToday ? "text-oc-blue" : ""}`}>
                     {date.getDate()}, {HU_WEEKDAYS[date.getDay()]}
                   </span>
-                  {relative && <span className="font-normal">{relative}</span>}
+                  {relative &&
+                    (isToday ? (
+                      <span className="rounded-full bg-oc-blue px-2.5 py-[3px] text-[12px] leading-[14px] font-semibold text-white">{relative}</span>
+                    ) : (
+                      <span className="text-[15px] font-medium text-oc-muted">{relative}</span>
+                    ))}
                 </h3>
               )}
 

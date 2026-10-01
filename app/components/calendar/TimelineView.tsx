@@ -139,7 +139,7 @@ export default function TimelineView({
                     key={event.key}
                     type="button"
                     onClick={() => onOpen(event)}
-                    className="truncate rounded-[5px] border-[1.5px] px-1.5 py-[3px] text-left text-[12px] leading-[15px] font-medium"
+                    className="truncate rounded-[7px] border-[1.5px] px-1.5 py-[3px] text-left text-[12px] leading-[15px] font-medium"
                     style={
                       useGreen
                         ? { borderColor: ALL_DAY_TONE.border, color: ALL_DAY_TONE.text, background: ALL_DAY_TONE.bg }
@@ -194,7 +194,7 @@ export default function TimelineView({
                       key={event.key}
                       type="button"
                       onClick={() => onOpen(event)}
-                      className="oc-ripple absolute overflow-hidden rounded-[5px] px-[7px] py-[3px] text-left"
+                      className="oc-card absolute overflow-hidden rounded-[8px] px-[8px] py-[4px] text-left"
                       style={{
                         ...eventSurface(event),
                         top,

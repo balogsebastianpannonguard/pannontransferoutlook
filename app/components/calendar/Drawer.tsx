@@ -185,14 +185,14 @@ export default function Drawer({ open, onClose, user, pendingCount, filters, onF
 
   return createPortal(
     <div className="oc-root fixed inset-0 z-[65]">
-      <div className="oc-fade-in absolute inset-0 bg-black/40" onClick={onClose} aria-hidden />
+      <div className="oc-fade-in absolute inset-0 bg-[#0b1220]/45 backdrop-blur-[3px]" onClick={onClose} aria-hidden />
       <aside
         role="dialog"
         aria-modal="true"
         aria-label="Menü"
-        className="oc-drawer-in oc-shadow-sheet absolute inset-y-0 left-0 flex w-[min(320px,86vw)] flex-col bg-white"
+        className="oc-drawer-in oc-shadow-sheet absolute inset-y-0 left-0 flex w-[min(320px,86vw)] flex-col rounded-r-[24px] bg-white"
       >
-        <div className="oc-safe-top bg-oc-blue px-4 pt-4 pb-4 text-white">
+        <div className="oc-safe-top oc-appbar rounded-tr-[24px] px-4 pt-4 pb-4 text-white">
           <div className="flex items-start justify-between">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-[17px] font-medium">
               {initials(user.name)}

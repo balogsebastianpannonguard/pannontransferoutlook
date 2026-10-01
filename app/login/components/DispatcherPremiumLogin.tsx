@@ -72,205 +72,178 @@ export default function DispatcherPremiumLogin() {
   };
 
   return (
-    <div className="relative min-h-screen bg-white flex flex-col justify-between overflow-hidden selection:bg-[#0056D2] selection:text-white">
-      {/* Pannon Transfer Elegant Background (NO GRID) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#0056D2]/[0.03] blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#FFD700]/[0.04] blur-[100px] rounded-full" />
+    <div className="lg-root relative flex min-h-dvh flex-col overflow-hidden text-white selection:bg-[#0f6cbd] selection:text-white">
+      {/* Háttér: mély éjkék, finom fények és szemcse */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div className="lg-orb absolute -top-32 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[#0f6cbd]/25 blur-[110px]" />
+        <div className="lg-orb absolute -right-24 bottom-10 h-[260px] w-[260px] rounded-full bg-[#d4af37]/10 blur-[90px] [animation-delay:-4s]" />
+        <div className="lg-grain absolute inset-0" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       </div>
 
-      {/* Elegant Header */}
-      <div className="relative z-10 w-full pt-10 px-8 flex justify-center">
-        <div className="flex items-center gap-3">
-          <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#0056D2] to-[#003F9F] flex items-center justify-center shadow-[0_4px_20px_rgba(0,86,210,0.2)]">
-            <span className="text-white font-serif font-bold text-lg tracking-tight">P</span>
-            <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-[#FFD700] to-[#E6B800] border-2 border-white" />
+      {/* Fejléc */}
+      <header className="relative z-10 flex justify-center px-6 pt-[calc(env(safe-area-inset-top)+44px)]">
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center"
+        >
+          <div className="relative mb-4 flex h-[60px] w-[60px] items-center justify-center rounded-[20px] bg-gradient-to-br from-[#2b88d8] via-[#0f6cbd] to-[#0a3f75] shadow-[0_18px_40px_-12px_rgba(15,108,189,0.8)] ring-1 ring-white/15">
+            <span className="font-serif text-[28px] font-bold leading-none tracking-tight">P</span>
+            <div className="lg-gold absolute -right-1 -bottom-1 h-[18px] w-[18px] rounded-full ring-[3px] ring-[#060a13]" />
           </div>
-          <div className="flex flex-col">
-            <span className="text-[15px] font-serif font-bold text-slate-900 leading-none tracking-wide">
-              Pannon Transfer
-            </span>
-            <span className="text-[9.5px] text-slate-400 mt-1 font-semibold tracking-[0.2em] uppercase">
-              Diszpécser Központ
-            </span>
-          </div>
-        </div>
-      </div>
+          <span className="font-serif text-[19px] font-bold tracking-wide">Pannon Transfer</span>
+          <span className="mt-1.5 text-[10px] font-semibold tracking-[0.32em] text-white/45 uppercase">Vezetői naptár</span>
+        </motion.div>
+      </header>
 
-      {/* Centered Main content */}
-      <div className="relative z-10 flex-1 flex items-center justify-center p-4">
-        <div className="w-full max-w-[420px]">
+      {/* Tartalom */}
+      <main className="relative z-10 flex flex-1 items-center justify-center px-5 py-8">
+        <div className="w-full max-w-[400px]">
           <AnimatePresence mode="wait">
             {state === "login" && (
               <motion.div
                 key="card-login"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15, scale: 0.98 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="relative"
+                initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -16, scale: 0.98 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+                className="lg-card relative rounded-[28px] border border-white/10 px-6 pt-8 pb-7 sm:px-8"
               >
-                <div className="absolute -inset-[1px] rounded-[24px] bg-gradient-to-br from-[#0056D2]/20 via-white to-[#FFD700]/30 blur-sm opacity-70" />
-                <div className="relative rounded-[24px] bg-white border border-slate-100 shadow-[0_20px_60px_-15px_rgba(0,86,210,0.08)] p-8 sm:p-10">
-                  <form onSubmit={handleSubmit} className="flex flex-col">
-                    <div className="mb-10 text-center">
-                      <h1 className="text-[32px] font-serif font-bold text-slate-900 tracking-tight mb-4">
-                        Bejelentkezés
-                      </h1>
-                      <div className="w-10 h-0.5 rounded-full bg-gradient-to-r from-[#FFD700] to-[#E6B800] mx-auto mb-5" />
-                      <p className="text-[13.5px] text-slate-500 font-medium px-4">
-                        Kérjük, adja meg diszpécseri hozzáférését a rendszerhez.
-                      </p>
-                    </div>
+                <form onSubmit={handleSubmit} className="flex flex-col" noValidate>
+                  <div className="mb-8 text-center">
+                    <h1 className="font-serif text-[30px] leading-tight font-bold tracking-tight">Üdvözöljük</h1>
+                    <div className="lg-gold mx-auto mt-3.5 mb-4 h-[2px] w-10 rounded-full" />
+                    <p className="text-[14px] leading-relaxed text-white/55">Jelentkezzen be a menetrend megtekintéséhez.</p>
+                  </div>
 
-                    <div className="space-y-5 mb-8">
-                      <div className="space-y-1.5">
-                        <label className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-400 ml-1">
-                          E-mail cím
-                        </label>
-                        <div
-                          className={cn(
-                            "relative flex items-center bg-slate-50/80 border transition-all duration-300 rounded-xl overflow-hidden",
-                            error
-                              ? "border-red-200 bg-red-50/50"
-                              : "border-slate-200/60 focus-within:border-[#0056D2]/50 focus-within:bg-white focus-within:ring-[3px] focus-within:ring-[#0056D2]/10 hover:border-slate-300"
-                          )}
-                        >
-                          <Mail
-                            className={cn(
-                              "absolute left-4 w-4 h-4 transition-colors",
-                              error ? "text-red-400" : "text-[#0056D2]/60"
-                            )}
-                          />
-                          <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => {
-                              setEmail(e.target.value);
-                              if (error) setError(null);
-                            }}
-                            placeholder="pelda@pannon.hu"
-                            className="w-full bg-transparent pl-11 pr-4 py-3.5 text-[14.5px] text-slate-900 placeholder:text-slate-300 font-medium outline-none"
-                            autoComplete="email"
-                            spellCheck={false}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-1.5">
-                        <div className="flex items-center justify-between ml-1 mr-1">
-                          <label className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                            Jelszó
-                          </label>
-                        </div>
-                        <div
-                          className={cn(
-                            "relative flex items-center bg-slate-50/80 border transition-all duration-300 rounded-xl overflow-hidden",
-                            error
-                              ? "border-red-200 bg-red-50/50"
-                              : "border-slate-200/60 focus-within:border-[#0056D2]/50 focus-within:bg-white focus-within:ring-[3px] focus-within:ring-[#0056D2]/10 hover:border-slate-300"
-                          )}
-                        >
-                          <Lock
-                            className={cn(
-                              "absolute left-4 w-4 h-4 transition-colors",
-                              error ? "text-red-400" : "text-[#0056D2]/60"
-                            )}
-                          />
-                          <input
-                            type={showPassword ? "text" : "password"}
-                            value={password}
-                            onChange={(e) => {
-                              setPassword(e.target.value);
-                              if (error) setError(null);
-                            }}
-                            placeholder="••••••••"
-                            className="w-full bg-transparent pl-11 pr-11 py-3.5 text-[14.5px] text-slate-900 placeholder:text-slate-300 font-medium outline-none tracking-widest"
-                            autoComplete="current-password"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword((v) => !v)}
-                            className="absolute right-2 w-8 h-8 flex items-center justify-center text-slate-300 hover:text-[#0056D2] transition-colors rounded-lg"
-                            tabIndex={-1}
-                          >
-                            {showPassword ? (
-                              <EyeOff className="w-[15px] h-[15px]" />
-                            ) : (
-                              <Eye className="w-[15px] h-[15px]" />
-                            )}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between mb-8 px-1">
-                      <label className="flex items-center gap-2.5 cursor-pointer group">
-                        <input
-                          type="checkbox"
-                          checked={remember}
-                          onChange={(e) => setRemember(e.target.checked)}
-                          className="sr-only"
-                        />
-                        <span
-                          className={cn(
-                            "w-4 h-4 rounded flex items-center justify-center border transition-all duration-300",
-                            remember
-                              ? "bg-[#0056D2] border-[#0056D2] shadow-[0_2px_8px_rgba(0,86,210,0.3)]"
-                              : "bg-white border-slate-300 group-hover:border-[#0056D2]/40"
-                          )}
-                          aria-hidden="true"
-                        >
-                          {remember && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
-                        </span>
-                        <span className="text-[12.5px] text-slate-500 font-medium select-none group-hover:text-slate-800 transition-colors">
-                          Maradjon bejelentkezve 3 napig
-                        </span>
+                  <div className="mb-6 space-y-4">
+                    <div className="space-y-2">
+                      <label htmlFor="lg-email" className="ml-1 text-[11px] font-semibold tracking-[0.14em] text-white/50 uppercase">
+                        E-mail cím
                       </label>
-                      <a
-                        href="mailto:dispecer@pannon.hu?subject=Jelsz%F3%20vissza%E1ll%EDt%E1s"
-                        className="text-[12px] font-semibold text-[#0056D2] hover:text-[#003F9F] transition-colors"
+                      <div
+                        className={cn(
+                          "relative flex items-center rounded-2xl border bg-white/[0.06] transition-all duration-300",
+                          error
+                            ? "border-red-400/40 bg-red-500/[0.08]"
+                            : "border-white/10 focus-within:border-[#2b88d8]/70 focus-within:bg-white/[0.09] focus-within:ring-4 focus-within:ring-[#0f6cbd]/25"
+                        )}
                       >
-                        Elfelejtette?
-                      </a>
+                        <Mail className={cn("absolute left-4 h-[18px] w-[18px] transition-colors", error ? "text-red-300" : "text-white/40")} />
+                        <input
+                          id="lg-email"
+                          type="email"
+                          inputMode="email"
+                          value={email}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                            if (error) setError(null);
+                          }}
+                          placeholder="nev@pannonguard.hu"
+                          className="h-[54px] w-full bg-transparent pr-4 pl-12 text-[16px] font-medium text-white outline-none placeholder:text-white/25"
+                          autoComplete="email"
+                          autoCapitalize="none"
+                          spellCheck={false}
+                        />
+                      </div>
                     </div>
 
-                    <AnimatePresence>
-                      {error && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -4, height: 0 }}
-                          animate={{ opacity: 1, y: 0, height: "auto" }}
-                          exit={{ opacity: 0, y: -4, height: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden mb-6"
-                        >
-                          <div className="flex items-center gap-2.5 px-4 py-3 bg-red-50 border border-red-100/50 rounded-xl">
-                            <AlertTriangle className="w-4 h-4 text-red-500 shrink-0" />
-                            <p className="text-[12.5px] text-red-600 font-medium">{error}</p>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="group relative w-full h-[54px] rounded-xl bg-gradient-to-r from-[#0056D2] to-[#003F9F] text-white text-[14.5px] font-semibold shadow-[0_8px_20px_-6px_rgba(0,86,210,0.4)] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 overflow-hidden"
-                    >
-                      <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                      <span className="relative z-10 flex items-center gap-2">
-                        {loading ? (
-                          <Loader2 className="w-4.5 h-4.5 animate-spin" />
-                        ) : (
-                          <>
-                            Belépés
-                            <ArrowRight className="w-4.5 h-4.5 group-hover:translate-x-1 transition-transform duration-300" />
-                          </>
+                    <div className="space-y-2">
+                      <label htmlFor="lg-password" className="ml-1 text-[11px] font-semibold tracking-[0.14em] text-white/50 uppercase">
+                        Jelszó
+                      </label>
+                      <div
+                        className={cn(
+                          "relative flex items-center rounded-2xl border bg-white/[0.06] transition-all duration-300",
+                          error
+                            ? "border-red-400/40 bg-red-500/[0.08]"
+                            : "border-white/10 focus-within:border-[#2b88d8]/70 focus-within:bg-white/[0.09] focus-within:ring-4 focus-within:ring-[#0f6cbd]/25"
                         )}
+                      >
+                        <Lock className={cn("absolute left-4 h-[18px] w-[18px] transition-colors", error ? "text-red-300" : "text-white/40")} />
+                        <input
+                          id="lg-password"
+                          type={showPassword ? "text" : "password"}
+                          value={password}
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                            if (error) setError(null);
+                          }}
+                          placeholder="••••••••"
+                          className="h-[54px] w-full bg-transparent pr-12 pl-12 text-[16px] font-medium text-white outline-none placeholder:text-white/25"
+                          autoComplete="current-password"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((v) => !v)}
+                          aria-label={showPassword ? "Jelszó elrejtése" : "Jelszó megjelenítése"}
+                          className="absolute right-2 flex h-10 w-10 items-center justify-center rounded-xl text-white/40 transition-colors hover:text-white active:scale-90"
+                        >
+                          {showPassword ? <EyeOff className="h-[18px] w-[18px]" /> : <Eye className="h-[18px] w-[18px]" />}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mb-7 flex items-center justify-between gap-3 px-1">
+                    <label className="group flex cursor-pointer items-center gap-2.5">
+                      <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="sr-only" />
+                      <span
+                        className={cn(
+                          "flex h-[20px] w-[20px] items-center justify-center rounded-md border transition-all duration-300",
+                          remember ? "border-[#2b88d8] bg-[#0f6cbd] shadow-[0_2px_10px_rgba(15,108,189,0.6)]" : "border-white/25 bg-white/[0.04] group-hover:border-white/45"
+                        )}
+                        aria-hidden="true"
+                      >
+                        {remember && <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />}
                       </span>
-                    </button>
-                  </form>
-                </div>
+                      <span className="text-[12.5px] whitespace-nowrap font-medium text-white/60 select-none">Maradjon belépve 3 napig</span>
+                    </label>
+                    <a
+                      href="mailto:dispecer@pannon.hu?subject=Jelsz%F3%20vissza%E1ll%EDt%E1s"
+                      className="shrink-0 text-[13px] font-semibold text-[#6cb4f2] transition-colors hover:text-white"
+                    >
+                      Elfelejtette?
+                    </a>
+                  </div>
+
+                  <AnimatePresence>
+                    {error && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -4, height: 0 }}
+                        animate={{ opacity: 1, y: 0, height: "auto" }}
+                        exit={{ opacity: 0, y: -4, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="mb-5 overflow-hidden"
+                      >
+                        <div className="flex items-center gap-2.5 rounded-2xl border border-red-400/25 bg-red-500/10 px-4 py-3">
+                          <AlertTriangle className="h-4 w-4 shrink-0 text-red-300" />
+                          <p className="text-[13px] font-medium text-red-200">{error}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="lg-btn group relative flex h-[56px] w-full items-center justify-center gap-2 overflow-hidden rounded-2xl text-[16px] font-semibold text-white transition-all duration-300 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+                    <span className="relative z-10 flex items-center gap-2">
+                      {loading ? (
+                        <Loader2 className="h-5 w-5 animate-spin" />
+                      ) : (
+                        <>
+                          Belépés
+                          <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                        </>
+                      )}
+                    </span>
+                  </button>
+                </form>
               </motion.div>
             )}
 
@@ -287,43 +260,43 @@ export default function DispatcherPremiumLogin() {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.1, type: "spring", stiffness: 200, damping: 20 }}
-                  className="w-16 h-16 rounded-full bg-gradient-to-br from-[#0056D2] to-[#003F9F] flex items-center justify-center mb-6 shadow-[0_10px_30px_rgba(0,86,210,0.3)]"
+                  className="lg-btn mb-6 flex h-[72px] w-[72px] items-center justify-center rounded-full"
                 >
-                  <Check className="w-7 h-7 text-white" strokeWidth={2.5} />
+                  <Check className="h-8 w-8 text-white" strokeWidth={2.5} />
                 </motion.div>
-
                 <motion.h2
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="text-[24px] font-serif font-bold text-slate-900 mb-2"
+                  className="mb-1 font-serif text-[26px] font-bold"
                 >
                   Hitelesítve
                 </motion.h2>
-
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-[14px] text-white/50">
+                  A naptár betöltése…
+                </motion.p>
                 <motion.div
                   initial={{ opacity: 0, scaleX: 0 }}
                   animate={{ opacity: 1, scaleX: 1 }}
                   transition={{ delay: 0.3, duration: 0.8 }}
-                  className="w-16 h-[2px] rounded-full bg-slate-100 mt-6 overflow-hidden"
+                  className="mt-6 h-[2px] w-20 overflow-hidden rounded-full bg-white/10"
                 >
                   <motion.div
                     initial={{ x: "-100%" }}
                     animate={{ x: "100%" }}
                     transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
-                    className="w-full h-full bg-[#FFD700]"
+                    className="lg-gold h-full w-full"
                   />
                 </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
-      </div>
+      </main>
 
-      {/* Minimal Footer */}
-      <div className="relative z-10 w-full pb-8 px-8 flex justify-center text-[11.5px] text-slate-400 font-medium uppercase tracking-[0.05em]">
+      <footer className="relative z-10 flex justify-center px-6 pb-[calc(env(safe-area-inset-bottom)+24px)] text-[11px] font-medium tracking-[0.12em] text-white/30 uppercase">
         <span>© {new Date().getFullYear()} Pannon Transfer Zrt.</span>
-      </div>
+      </footer>
     </div>
   );
 }

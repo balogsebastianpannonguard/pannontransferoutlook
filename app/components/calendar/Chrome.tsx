@@ -49,7 +49,7 @@ function Popover({ open, onClose, children }: { open: boolean; onClose: () => vo
   return createPortal(
     <div className="oc-root fixed inset-0 z-[55]" onClick={onClose}>
       <div
-        className="oc-pop-in oc-shadow-pop absolute top-[calc(env(safe-area-inset-top)+52px)] right-2 min-w-[210px] rounded-[10px] bg-white py-1.5 lg:top-[52px]"
+        className="oc-pop-in oc-shadow-pop absolute top-[calc(env(safe-area-inset-top)+52px)] right-2 min-w-[220px] rounded-[14px] bg-white py-1.5 lg:top-[52px]"
         onClick={(e) => e.stopPropagation()}
       >
         {children}
@@ -140,21 +140,27 @@ interface AppBarProps {
   onMenu: () => void;
   onView: () => void;
   onSearch: () => void;
-  onAccount: () => void;
+  /** Mobilon a fiók a menüből (avatar) érhető el */
+  onAccount?: () => void;
 }
 
-export function AppBar({ title, view, user, filterActive, todayNumber, onToday, onMenu, onView, onSearch, onAccount }: AppBarProps) {
-  const iconBtn = "oc-ripple-light relative flex h-11 w-11 items-center justify-center rounded-full";
+export function AppBar({ title, view, user, filterActive, todayNumber, onToday, onMenu, onView, onSearch }: AppBarProps) {
+  const iconBtn = "oc-ripple-light relative flex h-11 w-11 items-center justify-center rounded-full transition-transform active:scale-90";
   return (
-    <div className="flex h-14 items-center pr-[2px] pl-[6px]">
-      <button type="button" onClick={onMenu} aria-label="Menü" className={iconBtn}>
-        <Menu size={22} />
-        {filterActive && <span className="absolute top-[10px] right-[9px] h-2 w-2 rounded-full bg-[#FFB900] ring-2 ring-oc-blue" />}
+    <div className="flex h-[58px] items-center pr-[2px] pl-[10px]">
+      <button type="button" onClick={onMenu} aria-label="Menü" className="relative flex h-11 w-11 items-center justify-center rounded-full transition-transform active:scale-90">
+        <span className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-white/95 text-[12.5px] font-semibold tracking-tight text-oc-blue shadow-[0_2px_8px_rgba(0,0,0,0.18)]">
+          {initials(user.name)}
+        </span>
+        <span className="absolute right-[2px] bottom-[2px] flex h-[15px] w-[15px] items-center justify-center rounded-full bg-white text-oc-blue ring-[1.5px] ring-oc-blue">
+          <Menu size={9} strokeWidth={3} />
+        </span>
+        {filterActive && <span className="absolute top-[4px] right-[4px] h-2.5 w-2.5 rounded-full bg-[#FFB900] ring-2 ring-oc-blue" />}
       </button>
-      <h1 className="ml-[7px] min-w-0 flex-1 truncate text-[20px] leading-[26px] font-normal">{title}</h1>
+      <h1 className="ml-[10px] min-w-0 flex-1 truncate text-[22px] leading-[28px] font-semibold tracking-[-0.01em] capitalize">{title}</h1>
       {onToday && (
         <button type="button" onClick={onToday} aria-label="Ugrás mára" className={iconBtn}>
-          <span className="flex h-[22px] w-[22px] items-center justify-center rounded-[5px] border-[1.8px] border-white text-[11px] leading-none font-bold">
+          <span className="flex h-[23px] w-[23px] items-center justify-center rounded-[6px] border-[1.8px] border-white text-[11px] leading-none font-bold">
             {todayNumber}
           </span>
         </button>
@@ -165,37 +171,36 @@ export function AppBar({ title, view, user, filterActive, todayNumber, onToday, 
       <button type="button" onClick={onSearch} aria-label="Keresés" className={iconBtn}>
         <Search size={22} />
       </button>
-      <button type="button" onClick={onAccount} aria-label="Fiók" className={iconBtn}>
-        <span className="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-white/25 text-[10.5px] font-medium tracking-tight">
-          {initials(user.name)}
-        </span>
-      </button>
     </div>
   );
 }
 
 export function BottomNav({ pendingCount }: { pendingCount: number }) {
-  const item = "oc-ripple relative flex flex-1 flex-col items-center justify-center gap-[3px] text-[12px] leading-[14px]";
+  const item = "relative flex flex-1 flex-col items-center justify-center gap-[3px] text-[11.5px] leading-[14px] font-medium transition-transform active:scale-95";
   return (
-    <nav className="oc-safe-bottom shrink-0 border-t border-oc-line bg-white" aria-label="Fő navigáció">
-      <div className="flex h-[56px]">
+    <nav className="oc-safe-bottom oc-glass-nav relative z-20 shrink-0 border-t border-black/[0.06]" aria-label="Fő navigáció">
+      <div className="flex h-[60px]">
         <Link href="/bookings" className={`${item} text-oc-muted`}>
-          <span className="relative">
-            <Mail size={23} strokeWidth={1.8} />
+          <span className="relative flex h-[30px] w-[56px] items-center justify-center rounded-full">
+            <Mail size={22} strokeWidth={1.8} />
             {pendingCount > 0 && (
-              <span className="absolute -top-1.5 -right-2.5 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[#D13438] px-1 text-[10px] font-semibold text-white">
+              <span className="absolute -top-0.5 right-[6px] flex h-[17px] min-w-[17px] ring-2 ring-white items-center justify-center rounded-full bg-[#D13438] px-1 text-[10px] font-semibold text-white">
                 {pendingCount > 99 ? "99+" : pendingCount}
               </span>
             )}
           </span>
           Foglalások
         </Link>
-        <span className={`${item} font-medium text-oc-blue`} aria-current="page">
-          <CalendarDays size={23} strokeWidth={2.1} />
+        <span className={`${item} font-semibold text-oc-blue`} aria-current="page">
+          <span className="flex h-[30px] w-[56px] items-center justify-center rounded-full bg-oc-tint">
+            <CalendarDays size={22} strokeWidth={2.1} />
+          </span>
           Naptár
         </span>
         <Link href="/drivers" className={`${item} text-oc-muted`}>
-          <Users size={23} strokeWidth={1.8} />
+          <span className="flex h-[30px] w-[56px] items-center justify-center rounded-full">
+            <Users size={22} strokeWidth={1.8} />
+          </span>
           Sofőrök
         </Link>
       </div>
@@ -214,7 +219,7 @@ export function Fab({ onNewBooking, onNewEvent }: { onNewBooking: () => void; on
 
   return (
     <>
-      {open && <div className="oc-fade-in absolute inset-0 z-20 bg-white/70" onClick={() => setOpen(false)} aria-hidden />}
+      {open && <div className="oc-fade-in absolute inset-0 z-20 bg-[#0b1220]/35 backdrop-blur-[2px]" onClick={() => setOpen(false)} aria-hidden />}
       <div className="absolute right-4 bottom-4 z-30 flex flex-col items-end gap-3">
         {open && (
           <>
@@ -224,7 +229,7 @@ export function Fab({ onNewBooking, onNewEvent }: { onNewBooking: () => void; on
                 setOpen(false);
                 onNewEvent();
               }}
-              className="oc-pop-in oc-shadow-pop flex h-11 items-center gap-2 rounded-full bg-white pr-4 pl-3 text-[14px] font-medium text-oc-ink"
+              className="oc-pop-in oc-shadow-pop flex h-11 items-center gap-2 rounded-full bg-white pr-4 pl-3 text-[14.5px] font-semibold text-oc-ink active:scale-95 transition-transform"
             >
               <CalendarPlus size={19} className="text-oc-blue" /> Szabadság / esemény
             </button>
@@ -234,7 +239,7 @@ export function Fab({ onNewBooking, onNewEvent }: { onNewBooking: () => void; on
                 setOpen(false);
                 onNewBooking();
               }}
-              className="oc-pop-in oc-shadow-pop flex h-11 items-center gap-2 rounded-full bg-white pr-4 pl-3 text-[14px] font-medium text-oc-ink"
+              className="oc-pop-in oc-shadow-pop flex h-11 items-center gap-2 rounded-full bg-white pr-4 pl-3 text-[14.5px] font-semibold text-oc-ink active:scale-95 transition-transform"
             >
               <Car size={19} className="text-oc-blue" /> Új út (foglalás)
             </button>
@@ -245,9 +250,9 @@ export function Fab({ onNewBooking, onNewEvent }: { onNewBooking: () => void; on
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Bezárás" : "Új"}
           aria-expanded={open}
-          className="oc-shadow-fab flex h-14 w-14 items-center justify-center rounded-full bg-oc-blue text-white transition-transform active:scale-95"
+          className="oc-shadow-fab oc-fab-grad flex h-[58px] w-[58px] items-center justify-center rounded-[20px] text-white transition-transform duration-200 active:scale-90"
         >
-          <Plus size={26} strokeWidth={2.2} className={`transition-transform duration-200 ${open ? "rotate-45" : ""}`} />
+          <Plus size={27} strokeWidth={2.2} className={`transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${open ? "rotate-[135deg]" : ""}`} />
         </button>
       </div>
     </>
@@ -272,7 +277,7 @@ export function Snackbar({ toast, onDismiss }: { toast: ToastData | null; onDism
     <div className="pointer-events-none absolute inset-x-0 bottom-[84px] z-40 flex justify-center px-3 lg:bottom-6" role="status" aria-live="polite">
       <div
         key={toast.id}
-        className="oc-snack-in pointer-events-auto flex max-w-[460px] items-center gap-3 rounded-[8px] bg-[#323232] py-2.5 pr-2 pl-4 text-[14px] leading-[20px] text-white shadow-lg"
+        className="oc-snack-in pointer-events-auto flex max-w-[460px] items-center gap-3 rounded-[14px] bg-[#1b1f2a]/95 backdrop-blur-md py-2.5 pr-2 pl-4 text-[14px] leading-[20px] text-white shadow-lg"
       >
         <span className="min-w-0 flex-1">{toast.text}</span>
         {toast.actionLabel && (
@@ -295,11 +300,11 @@ export function Snackbar({ toast, onDismiss }: { toast: ToastData | null; onDism
 export function CalendarSkeleton() {
   return (
     <div className="oc-root flex h-dvh flex-col bg-white">
-      <div className="oc-safe-top bg-oc-blue text-white">
-        <div className="flex h-14 items-center px-4 text-[20px]">Naptár</div>
+      <div className="oc-safe-top oc-appbar text-white">
+        <div className="flex h-[58px] items-center px-4 text-[22px] font-semibold">Naptár</div>
         <div className="h-[38px]" />
       </div>
-      <div className="h-[66px] rounded-b-[14px] bg-white oc-shadow-strip" />
+      <div className="h-[66px] rounded-b-[18px] bg-white oc-shadow-strip" />
       <div className="space-y-3 px-3 pt-6">
         {[0, 1, 2, 3].map((i) => (
           <div key={i} className="flex gap-3">

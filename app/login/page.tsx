@@ -25,3 +25,5 @@ export default async function LoginPage({
 
   return <DispatcherPremiumLogin />;
 }
+
+export const viewport = { themeColor: "#060a13" };

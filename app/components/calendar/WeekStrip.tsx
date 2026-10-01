@@ -7,7 +7,7 @@ const ROW_H = 44;
 
 export function WeekdayRow() {
   return (
-    <div className="grid h-[38px] grid-cols-7 items-center text-center text-[14px] font-medium text-white">
+    <div className="grid h-[34px] grid-cols-7 items-center text-center text-[12.5px] font-semibold tracking-[0.04em] text-white/80 uppercase">
       {HU_WEEKDAY_HEADERS.map((label) => (
         <span key={label}>{label}</span>
       ))}
@@ -26,32 +26,32 @@ interface DayCellProps {
 
 function DayCell({ date, selected, today, dim, hasEvents, onSelect }: DayCellProps) {
   const circle = selected
-    ? "bg-oc-blue text-white"
+    ? "bg-oc-blue text-white shadow-[0_4px_10px_-2px_rgba(15,108,189,0.55)] scale-[1.04]"
     : today
-      ? "bg-oc-tint text-oc-blue-dark"
+      ? "bg-oc-tint text-oc-blue-dark ring-[1.5px] ring-oc-blue/35"
       : dim
-        ? "text-[#ADADAD]"
-        : "text-oc-muted";
+        ? "text-[#B5B8BF]"
+        : "text-oc-ink/80";
   return (
     <button
       type="button"
       onClick={() => onSelect(date)}
       aria-label={date.toLocaleDateString("hu-HU", { month: "long", day: "numeric", weekday: "long" })}
       aria-pressed={selected}
-      className="relative block h-[44px] w-full outline-none"
+      className="relative block h-[44px] w-full outline-none active:opacity-70"
     >
       <span
-        className={`absolute top-[7px] left-1/2 flex h-[30px] w-[30px] -translate-x-1/2 items-center justify-center rounded-full text-[16px] leading-none transition-colors duration-150 ${circle} ${
-          selected || today ? "font-medium" : "font-normal"
+        className={`absolute top-[7px] left-1/2 flex h-[30px] w-[30px] -translate-x-1/2 items-center justify-center rounded-full text-[16px] leading-none tabular-nums transition-all duration-200 ease-out ${circle} ${
+          selected || today ? "font-semibold" : "font-normal"
         }`}
       >
         {date.getDate()}
       </span>
       {hasEvents && !selected && !today && (
-        <span className="absolute top-[31.5px] left-1/2 h-[5px] w-[5px] -translate-x-1/2 rounded-full bg-oc-dot" />
+        <span className="absolute top-[38.5px] left-1/2 h-[4px] w-[4px] -translate-x-1/2 rounded-full bg-oc-blue/45" />
       )}
       {hasEvents && today && !selected && (
-        <span className="absolute top-[35px] left-1/2 h-[4px] w-[4px] -translate-x-1/2 rounded-full bg-oc-blue" />
+        <span className="absolute top-[38.5px] left-1/2 h-[4px] w-[4px] -translate-x-1/2 rounded-full bg-oc-blue" />
       )}
     </button>
   );
@@ -186,7 +186,7 @@ export default function WeekStrip({ selected, today, eventDates, onSelect, force
 
   return (
     <div
-      className="oc-shadow-strip relative z-10 rounded-b-[14px] bg-white"
+      className="oc-shadow-strip relative z-10 rounded-b-[20px] bg-white"
       onClickCapture={(event) => {
         if (didDrag.current) {
           event.stopPropagation();
@@ -226,7 +226,7 @@ export default function WeekStrip({ selected, today, eventDates, onSelect, force
           aria-expanded={expanded}
           className="flex h-[22px] w-full items-center justify-center"
         >
-          <span className="h-1 w-9 rounded-full bg-[#D1D1D1]" />
+          <span className="h-[5px] w-10 rounded-full bg-[#D5D8DE]" />
         </button>
       )}
     </div>

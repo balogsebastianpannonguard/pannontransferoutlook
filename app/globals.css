@@ -62,15 +62,16 @@ html, body {
   --color-pannon-yellow: #FFD700;
   --color-pannon-yellow-dark: #E6B800;
 
-  --color-oc-blue: #306ab7;
-  --color-oc-blue-dark: #265287;
-  --color-oc-blue-deep: #1f4676;
-  --color-oc-tint: #ecf3fb;
-  --color-oc-ink: #242424;
-  --color-oc-muted: #616161;
-  --color-oc-line: #e1e1e1;
-  --color-oc-dot: #c7c6c4;
-  --color-oc-surface: #f5f5f5;
+  /* Microsoft Fluent (új Outlook) márkaszínek */
+  --color-oc-blue: #0f6cbd;
+  --color-oc-blue-dark: #115ea3;
+  --color-oc-blue-deep: #0c3b5e;
+  --color-oc-tint: #ebf3fc;
+  --color-oc-ink: #1b1b1f;
+  --color-oc-muted: #5f6368;
+  --color-oc-line: #e6e7eb;
+  --color-oc-dot: #b9bcc3;
+  --color-oc-surface: #f4f5f7;
 }
 
 @keyframes fadeInUp {
@@ -148,7 +149,9 @@ html, body {
 
 /* ---------- Outlook style calendar ---------- */
 .oc-root {
-  font-family: var(--font-outlook), Roboto, "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* iPhone-on SF, Windows-on Segoe (az Outlook betűje), máshol Roboto */
+  font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, var(--font-outlook), Roboto, system-ui, sans-serif;
+  letter-spacing: -0.005em;
   color: var(--color-oc-ink);
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior: none;
@@ -266,4 +269,60 @@ html, body {
   .oc-sheet-in, .oc-fade-in, .oc-drawer-in, .oc-pop-in, .oc-snack-in, .oc-skeleton {
     animation-duration: 1ms;
   }
+}
+
+/* ---------- Outlook felület finomítások ---------- */
+.oc-appbar {
+  background-image: linear-gradient(180deg, #0f6cbd 0%, #0e63ad 100%);
+}
+.oc-glass-nav {
+  background: rgba(255, 255, 255, 0.86);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  backdrop-filter: saturate(180%) blur(18px);
+}
+.oc-card {
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 1px rgba(16, 24, 40, 0.03);
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 160ms ease, filter 160ms ease;
+}
+.oc-card:active {
+  transform: scale(0.985);
+  filter: brightness(0.97);
+}
+.oc-fab-grad {
+  background-image: linear-gradient(135deg, #2b88d8 0%, #0f6cbd 55%, #0c5aa0 100%);
+}
+
+/* ---------- Sötét, elegáns belépőoldal ---------- */
+.lg-root {
+  background-color: #060a13;
+  background-image:
+    radial-gradient(120% 70% at 50% -10%, rgba(15, 108, 189, 0.38) 0%, rgba(15, 108, 189, 0) 60%),
+    radial-gradient(80% 50% at 100% 100%, rgba(212, 175, 55, 0.10) 0%, rgba(212, 175, 55, 0) 60%),
+    radial-gradient(70% 50% at 0% 85%, rgba(76, 94, 255, 0.10) 0%, rgba(76, 94, 255, 0) 60%);
+}
+.lg-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+.lg-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.035) 100%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.lg-btn {
+  background-image: linear-gradient(135deg, #2b88d8 0%, #0f6cbd 50%, #0b4f8f 100%);
+  box-shadow: 0 12px 30px -10px rgba(15, 108, 189, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+.lg-gold {
+  background-image: linear-gradient(90deg, #b8912f, #f3d27a, #b8912f);
+}
+@keyframes lg-float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -14px, 0) scale(1.04); }
+}
+.lg-orb { animation: lg-float 9s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .lg-orb { animation: none; }
 }
