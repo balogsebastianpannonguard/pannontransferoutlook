@@ -45,10 +45,14 @@ export default function DirectLoginRedirect({ token }: { token: string }) {
   }, [failed]);
 
   return (
-    <div className="relative min-h-screen bg-white flex items-center justify-center">
+    <div className="lg-root relative flex min-h-dvh items-center justify-center text-white">
       <div className="flex flex-col items-center gap-4">
-        <Loader2 className="w-8 h-8 text-[#0056D2] animate-spin" />
-        <p className="text-[13px] text-slate-400 font-medium tracking-wide">
+        <div className="relative flex h-[60px] w-[60px] items-center justify-center rounded-[20px] bg-gradient-to-br from-[#2b88d8] via-[#0f6cbd] to-[#0a3f75] shadow-[0_18px_40px_-12px_rgba(15,108,189,0.8)] ring-1 ring-white/15">
+          <span className="font-serif text-[28px] font-bold leading-none">P</span>
+          <div className="lg-gold absolute -right-1 -bottom-1 h-[18px] w-[18px] rounded-full ring-[3px] ring-[#060a13]" />
+        </div>
+        <Loader2 className="mt-2 h-6 w-6 animate-spin text-white/60" />
+        <p className="text-[13px] font-medium tracking-wide text-white/50">
           Bejelentkezés...
         </p>
       </div>
