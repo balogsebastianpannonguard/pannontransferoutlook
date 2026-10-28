@@ -25,13 +25,12 @@ export const TONES: Record<ToneId, Tone> = {
 
 export const PARTNER_TONES: Record<string, ToneId> = {
   catl: "blue",
-  ecopro: "teal",
-  eccoino: "sky",
-  vitesco: "rose",
-  schaeffler: "green",
-  krones: "indigo",
-  enterair: "purple",
+  ecoproinnovation: "teal",
+  ecoprobm: "sky",
+  schaefflermotion: "green",
+  schaefflerdebrecen: "indigo",
   tama: "lime",
+  ibusz: "rose",
   ni: "orange",
 };
 
