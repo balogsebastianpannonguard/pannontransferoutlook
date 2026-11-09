@@ -40,7 +40,7 @@ function EmptyDay({ day, loading, onAdd }: { day: string; loading?: boolean; onA
         <span className="grid size-[26px] shrink-0 place-items-center rounded-full bg-white text-[#8A8886] shadow-[0_0_0_1px_#E6E6E6]">
           <CalendarCheck size={14} strokeWidth={1.9} />
         </span>
-        <span className="min-w-0 flex-1 text-[14px] leading-[18px] text-[#6F6F6F]">Erre a napra nincs tevékenység</span>
+        <span className="min-w-0 flex-1 text-[14.5px] leading-[18px] text-[#6F6F6F]">Erre a napra nincs tevékenység</span>
         {onAdd && <Plus size={17} strokeWidth={2} className="shrink-0 text-oc-blue" aria-hidden />}
       </button>
     </div>
@@ -203,7 +203,7 @@ export default function AgendaView({
               {showMonth && (
                 <div className="mt-4 mb-[14px] flex items-center gap-[12px] px-3">
                   <span className="h-px flex-1 bg-gradient-to-r from-transparent to-oc-ink/25" />
-                  <span className="text-[13px] leading-[18px] font-bold tracking-[0.14em] text-oc-ink/70 uppercase">
+                  <span className="text-[14px] leading-[18px] font-bold tracking-[0.14em] text-oc-ink/70 uppercase">
                     {HU_MONTHS[date.getMonth()]}
                     {date.getFullYear() !== today.getFullYear() ? ` ${date.getFullYear()}` : ""}
                   </span>
@@ -218,10 +218,27 @@ export default function AgendaView({
                   </span>
                   {relative &&
                     (isToday ? (
-                      <span className="rounded-full bg-oc-blue px-2.5 py-[3px] text-[12px] leading-[14px] font-semibold text-white">{relative}</span>
+                      <span className="rounded-full bg-oc-blue px-2.5 py-[3px] text-[12.5px] leading-[14px] font-semibold text-white">{relative}</span>
                     ) : (
                       <span className="text-[15px] font-medium text-oc-muted">{relative}</span>
                     ))}
+                  {(() => {
+                    const trips = events.filter((e) => e.booking && !e.cancelled);
+                    if (trips.length === 0) return null;
+                    const open = trips.filter((e) => e.unassigned).length;
+                    return (
+                      <span className="ml-auto flex items-center gap-1.5">
+                        <span className="rounded-full bg-oc-tint px-2.5 py-[3px] text-[12.5px] leading-[16px] font-semibold text-oc-blue-dark">
+                          {trips.length} út
+                        </span>
+                        {open > 0 && (
+                          <span className="rounded-full bg-[#B3261E] px-2.5 py-[3px] text-[12.5px] leading-[16px] font-semibold text-white">
+                            {open} sofőr nélkül
+                          </span>
+                        )}
+                      </span>
+                    );
+                  })()}
                 </h3>
               )}
 

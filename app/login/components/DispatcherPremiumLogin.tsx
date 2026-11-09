@@ -59,7 +59,7 @@ export default function DispatcherPremiumLogin() {
         setState("done");
         setTimeout(() => {
           router.push("/");
-        }, 1800);
+        }, 700);
         return;
       }
 
@@ -94,7 +94,7 @@ export default function DispatcherPremiumLogin() {
             <div className="lg-gold absolute -right-1 -bottom-1 h-[18px] w-[18px] rounded-full ring-[3px] ring-[#060a13]" />
           </div>
           <span className="font-serif text-[19px] font-bold tracking-wide">Pannon Transfer</span>
-          <span className="mt-1.5 text-[10px] font-semibold tracking-[0.32em] text-white/45 uppercase">Vezetői naptár</span>
+          <span className="mt-1.5 text-[12px] font-semibold tracking-[0.28em] text-white/60 uppercase">Vezetői naptár</span>
         </motion.div>
       </header>
 
@@ -120,7 +120,7 @@ export default function DispatcherPremiumLogin() {
 
                   <div className="mb-6 space-y-4">
                     <div className="space-y-2">
-                      <label htmlFor="lg-email" className="ml-1 text-[11px] font-semibold tracking-[0.14em] text-white/50 uppercase">
+                      <label htmlFor="lg-email" className="ml-1 text-[12.5px] font-semibold tracking-[0.1em] text-white/65 uppercase">
                         E-mail cím
                       </label>
                       <div
@@ -142,7 +142,7 @@ export default function DispatcherPremiumLogin() {
                             if (error) setError(null);
                           }}
                           placeholder="nev@pannonguard.hu"
-                          className="h-[54px] w-full bg-transparent pr-4 pl-12 text-[16px] font-medium text-white outline-none placeholder:text-white/25"
+                          className="h-[54px] w-full bg-transparent pr-4 pl-12 text-[16px] font-medium text-white outline-none placeholder:text-white/35"
                           autoComplete="email"
                           autoCapitalize="none"
                           spellCheck={false}
@@ -151,7 +151,7 @@ export default function DispatcherPremiumLogin() {
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="lg-password" className="ml-1 text-[11px] font-semibold tracking-[0.14em] text-white/50 uppercase">
+                      <label htmlFor="lg-password" className="ml-1 text-[12.5px] font-semibold tracking-[0.1em] text-white/65 uppercase">
                         Jelszó
                       </label>
                       <div
@@ -172,7 +172,7 @@ export default function DispatcherPremiumLogin() {
                             if (error) setError(null);
                           }}
                           placeholder="••••••••"
-                          className="h-[54px] w-full bg-transparent pr-12 pl-12 text-[16px] font-medium text-white outline-none placeholder:text-white/25"
+                          className="h-[54px] w-full bg-transparent pr-12 pl-12 text-[16px] font-medium text-white outline-none placeholder:text-white/35"
                           autoComplete="current-password"
                         />
                         <button
@@ -199,11 +199,11 @@ export default function DispatcherPremiumLogin() {
                       >
                         {remember && <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />}
                       </span>
-                      <span className="text-[12.5px] whitespace-nowrap font-medium text-white/60 select-none">Maradjon belépve 3 napig</span>
+                      <span className="text-[13.5px] whitespace-nowrap font-medium text-white/70 select-none">Maradjon belépve 3 napig</span>
                     </label>
                     <a
                       href="mailto:dispecer@pannon.hu?subject=Jelsz%F3%20vissza%E1ll%EDt%E1s"
-                      className="shrink-0 text-[13px] font-semibold text-[#6cb4f2] transition-colors hover:text-white"
+                      className="shrink-0 text-[14px] font-semibold text-[#6cb4f2] transition-colors hover:text-white"
                     >
                       Elfelejtette?
                     </a>
@@ -220,7 +220,7 @@ export default function DispatcherPremiumLogin() {
                       >
                         <div className="flex items-center gap-2.5 rounded-2xl border border-red-400/25 bg-red-500/10 px-4 py-3">
                           <AlertTriangle className="h-4 w-4 shrink-0 text-red-300" />
-                          <p className="text-[13px] font-medium text-red-200">{error}</p>
+                          <p className="text-[14px] font-medium text-red-200">{error}</p>
                         </div>
                       </motion.div>
                     )}
@@ -294,7 +294,7 @@ export default function DispatcherPremiumLogin() {
         </div>
       </main>
 
-      <footer className="relative z-10 flex justify-center px-6 pb-[calc(env(safe-area-inset-bottom)+24px)] text-[11px] font-medium tracking-[0.12em] text-white/30 uppercase">
+      <footer className="relative z-10 flex justify-center px-6 pb-[calc(env(safe-area-inset-bottom)+24px)] text-[12px] font-medium tracking-[0.1em] text-white/40 uppercase">
         <span>© {new Date().getFullYear()} Pannon Transfer Zrt.</span>
       </footer>
     </div>

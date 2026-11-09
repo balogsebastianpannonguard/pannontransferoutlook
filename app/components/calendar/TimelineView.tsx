@@ -6,6 +6,7 @@ import { layoutTimed } from "@/lib/calendar/mapping";
 import { ALL_DAY_TONE, TONES } from "@/lib/calendar/tones";
 import type { CalEvent } from "@/lib/calendar/types";
 import { eventSurface, EventStatusChip } from "./EventCards";
+import { bookingRoute, driverGivenName } from "@/lib/calendar/mapping";
 
 interface Props {
   days: Date[];
@@ -20,7 +21,7 @@ interface Props {
   onPage?: (dir: 1 | -1) => void;
 }
 
-const GUTTER = 46;
+const GUTTER = 48;
 
 function hourLabel(hour: number) {
   return `${hour}:00`;
@@ -32,7 +33,7 @@ export default function TimelineView({
   now,
   selected,
   showHeader,
-  hourPx = 56,
+  hourPx = 64,
   scrollKey,
   onOpen,
   onSelectDay,
@@ -127,7 +128,7 @@ export default function TimelineView({
       {hasAllDay && (
         <div className="flex shrink-0 border-b border-oc-line bg-white py-1">
           <div style={{ width: GUTTER }} className="flex shrink-0 items-start justify-end pt-[3px] pr-1.5">
-            <span className="text-[9.5px] leading-[12px] font-medium tracking-wide text-oc-muted uppercase">Egész</span>
+            <span className="text-[11px] leading-[13px] font-medium tracking-wide text-oc-muted uppercase">Egész</span>
           </div>
           {days.map((day, index) => (
             <div key={ymd(day)} className="flex min-w-0 flex-1 flex-col gap-[3px] px-[2px]">
@@ -161,7 +162,7 @@ export default function TimelineView({
             {Array.from({ length: 23 }, (_, i) => i + 1).map((hour) => (
               <span
                 key={hour}
-                className="absolute right-1.5 text-[11px] leading-[14px] text-oc-muted tabular-nums"
+                className="absolute right-1.5 text-[12px] leading-[14px] text-oc-muted tabular-nums"
                 style={{ top: hour * hourPx - 7 }}
               >
                 {hourLabel(hour)}
@@ -186,8 +187,8 @@ export default function TimelineView({
                   const startMin = Math.max(0, (event.start - dayStart) / MS_MINUTE);
                   const endMin = Math.min(1440, (event.end - dayStart) / MS_MINUTE);
                   const top = (startMin / 60) * hourPx + 1;
-                  const height = Math.max(22, ((endMin - startMin) / 60) * hourPx - 2);
-                  const tall = height >= 44;
+                  const height = Math.max(28, ((endMin - startMin) / 60) * hourPx - 2);
+                  const tall = height >= 46;
                   const strike = event.cancelled ? "line-through" : "";
                   return (
                     <button
@@ -203,11 +204,30 @@ export default function TimelineView({
                         width: `calc(${100 / columns}% - 4px)`,
                       }}
                     >
-                      <div className={`truncate text-[12.5px] leading-[16px] font-medium ${strike}`}>{event.title}</div>
-                      {tall && event.subtitle && (
-                        <div className={`truncate text-[11px] leading-[14px] opacity-80 ${strike}`}>{event.subtitle}</div>
+                      {event.booking ? (
+                        <>
+                          <div className={`truncate text-[13px] leading-[16px] font-bold ${strike}`}>
+                            {bookingRoute(event.booking).from.short} → {bookingRoute(event.booking).to.short}
+                          </div>
+                          {tall && (
+                            <div className={`truncate text-[12px] leading-[15px] font-medium opacity-90 ${strike}`}>
+                              {event.booking.driverName ? driverGivenName(event.booking.driverName) : event.unassigned ? "⚠ nincs sofőr" : ""}
+                              {event.booking.driverName && columns < 2 ? ` · ${event.booking.travelers} fő` : ""}
+                            </div>
+                          )}
+                          {height >= 62 && columns < 3 && (
+                            <div className={`truncate text-[11.5px] leading-[14px] opacity-75 ${strike}`}>{event.title.split(" ")[0]}</div>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          <div className={`truncate text-[13px] leading-[16px] font-semibold ${strike}`}>{event.title}</div>
+                          {tall && event.subtitle && (
+                            <div className={`truncate text-[12px] leading-[15px] opacity-80 ${strike}`}>{event.subtitle}</div>
+                          )}
+                        </>
                       )}
-                      {height >= 70 && (
+                      {height >= 84 && (
                         <div className="mt-0.5">
                           <EventStatusChip event={event} />
                         </div>

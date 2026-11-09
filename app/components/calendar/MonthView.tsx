@@ -71,7 +71,7 @@ export default function MonthView({ anchor, today, eventsByDate, onOpen, onSelec
                             e.stopPropagation();
                             onOpen(event);
                           }}
-                          className={`flex h-[20px] items-center gap-1 truncate rounded-[4px] px-1.5 text-left text-[11.5px] leading-none font-medium ${
+                          className={`flex h-[22px] items-center gap-1 truncate rounded-[4px] px-1.5 text-left text-[12px] leading-none font-medium ${
                             event.cancelled ? "line-through" : ""
                           }`}
                           style={
@@ -94,7 +94,7 @@ export default function MonthView({ anchor, today, eventsByDate, onOpen, onSelec
                           e.stopPropagation();
                           onOpenDay(date);
                         }}
-                        className="px-1.5 text-left text-[11.5px] font-medium text-oc-blue hover:underline"
+                        className="px-1.5 text-left text-[12px] font-medium text-oc-blue hover:underline"
                       >
                         +{extra} további
                       </button>
